@@ -1,50 +1,22 @@
-.App {
+body{
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smooting:antialiased;
+
+  background: linear-gradient(to right, rgb(77, 95, 146) 0%,rgba(0,128,128,1) 100%);
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.container-input{
+  padding-top: 30px;
+  margin-top: 30px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-
-
-.input-busca{
-  width: 300px;
-  height: 50px;
-  border-radius: 10px;
-  padding-left: 10px;
-  font-size: 20px;
-  margin-top: 10px;
+.app-title{
+  margin-top: 55px;
+  font-size: 76px;
+  text-transform: uppercase;
+  color:aqua;
 }
