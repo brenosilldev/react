@@ -1,6 +1,7 @@
 import './App.css';
 import { Component } from 'react';
-
+import  CardList from './componentes/card_list/card-list';
+import Search from './componentes/search/search';
 
 class App extends Component {
   constructor(){
@@ -8,7 +9,7 @@ class App extends Component {
     this.state ={
         monsters : [],
         searchField : ''
-       
+         
     }
   }
 
@@ -28,35 +29,23 @@ class App extends Component {
   FiltrarBuscar = (event) => {
     const searchField = event.target.value.toLocaleLowerCase()
     this.setState(() => {
-      return { searchField}
+      return { searchField }
     })
   }
 
 
   render(){
 
+    const { FiltrarBuscar } = this
+ 
     const novomonster = this.state.monsters.filter((item) =>{
         return item.name.toLocaleLowerCase().includes(this.state.searchField)
     })
     
     return (
       <div className="App">
-          <div>
-            <input type='search' placeholder='Pesquise monstros' className='input-busca' 
-              onChange={this.FiltrarBuscar}/>
-          </div>
-          {novomonster.map((item) => {
-            return (
-              <div key={item.id} className='container'>
-                  <h1>{item.name} - {item.username}</h1>
-                  <p>Email: {item.email}</p>
-                  
-                  
-
-
-              </div>
-            )
-        })}
+        <Search type={'Search'} placeholder={'Procure um robo'} onChangeHandler={FiltrarBuscar} />
+        <CardList monsters={novomonster} />
       </div>
     );
   }
