@@ -1,6 +1,10 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth,signInWithPopup,GoogleAuthProvider,OAuthProvider } from "firebase/auth"
+import { getAuth,signInWithPopup,GoogleAuthProvider,createUserWithEmailAndPassword } from "firebase/auth"
+
+
+import  {getFirestore,doc,getDoc,setDoc } from "firebase/firestore"
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDYGl_bnxDEypzn3eyTPf_1LblOp6Anr_Y",
@@ -13,20 +17,52 @@ const firebaseConfig = {
 
 export const firebaseApp = initializeApp(firebaseConfig);
 
-const provider = new GoogleAuthProvider();
-const providerapple = new OAuthProvider('apple.com');
+const googleprovider = new GoogleAuthProvider();
 
-provider.setCustomParameters({
+googleprovider.setCustomParameters({
     prompt : 'select_account'
 })
 
-providerapple.setCustomParameters({
-    // Localize the Apple authentication screen in French.
-    locale: 'pt_BR'
-  });
-
 export const auth = getAuth();
-export const signInwithGooglePoup = () => signInWithPopup(auth,provider)
-export const signInwithApplePoup = () => signInWithPopup(auth,providerapple)
+
+export const signInwithGooglePoup = () => signInWithPopup(auth,googleprovider)
+
+// export const signInwithGoogleRedirect =  () => signInWithRedirect(auth,googleprovider)
+
+export const db = getFirestore()
+
+export const createUserDocumentFromAuth = async(userAuth,informacaoadicional= {}) =>{
+   const userdocRef = doc(db,'users',userAuth.uid)
+   const usersnap = await getDoc(userdocRef)
+   
+  if(!usersnap.exists()){
+      const { displayName,email} = userAuth;
+      const created = new Date();
+
+      try{
+          await setDoc(userdocRef,{
+            displayName,
+            email,
+            created,
+            ...informacaoadicional
+          })
+      }catch(error){
+        console.log('Erro: ',error.message)
+
+      }
+  }
+
+  return userdocRef
+
+}
 
 
+
+export const  createUser = async (email,password) => {
+  
+  if(!email || !password) return;
+  const create = createUserWithEmailAndPassword(auth,email,password)
+
+  return create
+
+}
