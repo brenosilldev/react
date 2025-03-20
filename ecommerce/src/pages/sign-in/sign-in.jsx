@@ -9,19 +9,19 @@ const Signin = () =>{
 
     return (
         <>
-            <section>
-                <div className="container-sign">
-                    <div className="subcontainer">
-                        <SigninComponent />
-
-                    </div>
-                    <div className="subcontainer">
-                        <SignupComponent/>
-                    </div>
+        
+            <div className="container">
+                <div className="subcontainer">
+                    <SigninComponent />
 
                 </div>
+                <div className="subcontainer">
+                    <SignupComponent/>
+                </div>
 
-            </section>
+            </div>
+
+        
         </>
     )
 
